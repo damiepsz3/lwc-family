@@ -1,37 +1,56 @@
 <template>
-    <lightning-card>
-        <h3 slot="title">
-            <lightning-icon title="Who lives with me" icon-name="action:new_group" size="x-small"></lightning-icon> 
-        </h3>
-        <div slot="footer">
-                <lightning-badge label="Tag1"></lightning-badge>
-                <lightning-badge label="Tag2"></lightning-badge>
-                <lightning-badge label="Tag3"></lightning-badge>
-        </div>
-        <template if:true={contact.data}>
-            <div>
-                <div class="slds-card slds-has-bottom-magnet">
-                    <div class="slds-p-around_medium">Father: <lightning-badge label={father}></lightning-badge></div>
-                </div>
-                <div class="slds-card slds-has-top-magnet">
-                      <div class="slds-p-around_medium">Mother: <lightning-badge label={mother}></lightning-badge></div>
-                </div>
-                <div class="slds-card slds-has-top-magnet">
-                    <div class="slds-p-around_medium">Sisters: <lightning-badge label={sisters}></lightning-badge></div>
-                </div>
-                <div class="slds-card slds-has-top-magnet">
-                    <div class="slds-p-around_medium">Brothers: <lightning-badge label={brothers}></lightning-badge></div>
-                </div>
-                <div class="slds-card slds-has-top-magnet">
-                    <div class="slds-p-around_medium">Step Father: <lightning-badge label={stepDad}></lightning-badge></div>
-                </div>
-                <div class="slds-card slds-has-top-magnet">
-                    <div class="slds-p-around_medium">Step Mother: <lightning-badge label={stepMom}></lightning-badge></div>
-                </div>  
-                <div class="slds-card slds-has-top-magnet">
-                    <div class="slds-p-around_medium">Other: <lightning-badge label={other}></lightning-badge></div>
-                </div> 
+    <template if:true={showForm}>
+            <lightning-record-edit-form object-api-name="Contact" record-id={recordId} onsuccess={handleSuccess}>
+            <lightning-input-field field-name="Home_Father__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Mother__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Brother_Stepbrother__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Sister_Stepsister__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Stepfather__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Stepmother__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Other__c"></lightning-input-field>
+            <lightning-input-field field-name="Home_Other_Relationship__c"></lightning-input-field>
+            <lightning-button
+                class="slds-m-top_small"
+                variant="brand"
+                type="submit"
+                name="update"
+                label="Update">
+            </lightning-button>
+        </lightning-record-edit-form>
+    </template>
+    <template if:false={showForm}>
+        <lightning-card>
+            <h3 slot="title">
+                <lightning-icon title="Who lives with me" icon-name="action:new_group" size="x-small"></lightning-icon> 
+            </h3>
+            <div slot="footer">
+                    <lightning-button label="Edit" onclick={openForm}></lightning-button>
             </div>
-        </template>    
-    </lightning-card>
+            <template if:true={contact.data}>
+                <div>
+                    <div class="slds-card slds-has-bottom-magnet">
+                        <div class="slds-p-around_medium">Father: <lightning-badge label={father}></lightning-badge></div>
+                    </div>
+                    <div class="slds-card slds-has-top-magnet">
+                        <div class="slds-p-around_medium">Mother: <lightning-badge label={mother}></lightning-badge></div>
+                    </div>
+                    <div class="slds-card slds-has-top-magnet">
+                        <div class="slds-p-around_medium">Sisters: <lightning-badge label={sisters}></lightning-badge></div>
+                    </div>
+                    <div class="slds-card slds-has-top-magnet">
+                        <div class="slds-p-around_medium">Brothers: <lightning-badge label={brothers}></lightning-badge></div>
+                    </div>
+                    <div class="slds-card slds-has-top-magnet">
+                        <div class="slds-p-around_medium">Step Father: <lightning-badge label={stepDad}></lightning-badge></div>
+                    </div>
+                    <div class="slds-card slds-has-top-magnet">
+                        <div class="slds-p-around_medium">Step Mother: <lightning-badge label={stepMom}></lightning-badge></div>
+                    </div>  
+                    <div class="slds-card slds-has-top-magnet">
+                        <div class="slds-p-around_medium">Other: <lightning-badge label={other}></lightning-badge></div>
+                    </div> 
+                </div>
+            </template>    
+        </lightning-card>
+    </template>
 </template>

@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 
 const FIELDS = [
@@ -18,6 +18,16 @@ export default class Familtyrel extends LightningElement {
 
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS })
     contact;
+
+    @track showForm = false;
+
+    openForm() {
+        this.showForm = !this.showForm
+    }
+
+    handleSuccess() {
+        this.showForm = !this.showForm
+    }
 
     get brothers() {
         const bro = this.contact.data.fields.Home_Brother_Stepbrother__c.value
